@@ -4,26 +4,28 @@ class NeovimNightly < Formula
   version "nightly"
   license "Apache-2.0"
 
+  livecheck do
+    skip "No version information available for nightly builds"
+  end
+
   on_macos do
     if Hardware::CPU.arm?
       url "https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-arm64.tar.gz"
-      # We'll need to update the sha256 regularly or use :no_check
-      sha256 :no_check
     else
       url "https://github.com/neovim/neovim/releases/download/nightly/nvim-macos-x86_64.tar.gz"
-      sha256 :no_check
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
       url "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-arm64.tar.gz"
-      sha256 :no_check
     else
       url "https://github.com/neovim/neovim/releases/download/nightly/nvim-linux-x86_64.tar.gz"
-      sha256 :no_check
     end
   end
+
+  # We don't need to verify checksum for nightly builds
+  sha256 ""
 
   conflicts_with "neovim", because: "ships the same binaries"
 
